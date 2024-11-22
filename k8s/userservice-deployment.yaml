@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eventservice-deployment
+  name: locationservice-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eventservice
+      app: locationservice
   template:
     metadata:
       labels:
-        app: eventservice
+        app: locationservice
     spec:
       containers:
-      - name: eventservice
-        image: a23893/eventservice:main 
+      - name: locationservice
+        image: a23893/locationservice:main 
         ports:
         - containerPort: 5002
         env:
           - name: DB_HOST
-            value: "eventservice-db-service"  
+            value: "locationservice-db-service"  
           - name: DB_PORT
             value: "5432"                  
           - name: DB_USER
-            value: "eventservice_user"      
+            value: "locationservice_user"      
           - name: DB_PASSWORD
-            value: "eventservice_pass"      
+            value: "locationservice_pass"      
           - name: DB_NAME
-            value: "eventservice_db" 
+            value: "locationservice_db" 
