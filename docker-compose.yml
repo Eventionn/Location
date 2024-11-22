@@ -3,9 +3,9 @@ version: '3.9'
 services:
   postgres:
     image: postgres:15
-    container_name: postgres_container_events
+    container_name: postgres_container_location
     ports:
-      - "5003:5432" # Porta local mapeada para a porta padrão do PostgreSQL
+      - "5004:5432" # Porta local mapeada para a porta padrão do PostgreSQL
     environment:
       POSTGRES_USER: databaselocal # Substitua pelo seu usuário
       POSTGRES_PASSWORD: databaselocal # Substitua pela sua senha
