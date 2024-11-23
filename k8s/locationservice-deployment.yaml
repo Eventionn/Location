@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: locationservice
-        image: a23893/locationservice:main 
+        image: pedromartins70/locationservice:latest 
         ports:
         - containerPort: 5005
         env:
