@@ -1,28 +1,39 @@
 import { prisma } from '../src/prismaClient.js';
+import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';  
 
-const locationsData = [
-  {
-    locationId: 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee',
-    localtown: 'Denver', 
-    city: 'Colorado'
-  },
-  {
-    locationId: 'ffffffff-ffff-ffff-ffff-ffffffffffff',
-    localtown: 'Manila',
-    city: 'Philippines'
-  },
-];
+const loadLocationsFromFile = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile('./freguesias-metadata.json', 'utf8', (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+      try {
+        const parsedData = JSON.parse(data);
+        resolve(parsedData.d); 
+      } catch (parseError) {
+        reject(parseError);
+      }
+    });
+  });
+};
 
 const seedDatabase = async () => {
   try {
     console.log('🌱 Starting seeding process...');
 
-    // Seed Locations
-    for (const location of locationsData) { 
-      const createdLocation = await prisma.location.create({ 
+    const locationsData = await loadLocationsFromFile();
+
+    const formattedLocations = locationsData.map(location => ({
+      locationId: uuidv4(), 
+      localtown: location.concelho, 
+      city: location.freguesia,
+    }));
+
+    for (const location of formattedLocations) {
+      const createdLocation = await prisma.location.create({
         data: location,
       });
-      console.log(`✅ Created location with ID: ${createdLocation.locationId}`);
     }
 
     console.log('🌱 Seeding completed successfully!');
