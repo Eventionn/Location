@@ -6,7 +6,7 @@ metadata:
   labels:
     app: locationservice-db
 spec:
-  serviceName: "locationservice-db-service" # Nome do serviço usado para resolver o endereço interno do banco
+  serviceName: "locationservice-db-service"
   replicas: 1
   selector:
     matchLabels:
