@@ -11,7 +11,8 @@ generator client {
 }
 
 model Location {
-  localtown String  @id @default(uuid()) @db.Uuid
+  locationId String @id @default(uuid()) @db.Uuid
+  localtown String  @db.VarChar(20)
   city        String  @db.VarChar(20)
 
   @@map("Locations") 

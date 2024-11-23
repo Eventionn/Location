@@ -2,13 +2,15 @@ import { prisma } from '../src/prismaClient.js';
 
 const locationsData = [
   {
-    localtown: 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee', 
-    city: 'Colorado',
+    locationId: 'eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee',
+    localtown: 'Denver', 
+    city: 'Colorado'
   },
   {
-    localtown: 'ffffffff-ffff-ffff-ffff-ffffffffffff',
-    city: 'Philippines',
-  }
+    locationId: 'ffffffff-ffff-ffff-ffff-ffffffffffff',
+    localtown: 'Manila',
+    city: 'Philippines'
+  },
 ];
 
 const seedDatabase = async () => {
@@ -20,7 +22,7 @@ const seedDatabase = async () => {
       const createdLocation = await prisma.location.create({ 
         data: location,
       });
-      console.log(`✅ Created location with ID: ${createdLocation.localtown}`);
+      console.log(`✅ Created location with ID: ${createdLocation.locationId}`);
     }
 
     console.log('🌱 Seeding completed successfully!');

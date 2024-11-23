@@ -18,7 +18,7 @@ const locationService = {
    */
   async getLocationById(locationId) {
     return prisma.location.findUnique({
-      where: { localtown: locationId },
+      where: { locationId: locationId },
     });
   },
 
@@ -41,7 +41,7 @@ const locationService = {
    */
   async updateLocation(locationId, locationData) {
     return prisma.location.update({
-      where: { localtown: locationId },
+      where: { locationId: locationId },
       data: locationData,
     });
   },
@@ -53,7 +53,7 @@ const locationService = {
    */
   async deleteLocation(locationId) {
     await prisma.location.delete({
-      where: { localtown: locationId },
+      where: { locationId: locationId },
     });
   }
 };
