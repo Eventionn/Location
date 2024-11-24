@@ -53,7 +53,6 @@ const locationController = {
     try {
       const { localtown, city } = req.body;
 
-      // Verificar campos obrigatórios
       if (!localtown || !city) {
         return res.status(400).json({ message: 'Missing required fields: localtown, city' });
       }
@@ -107,7 +106,7 @@ const locationController = {
       }
 
       await locationService.deleteLocation(locationId);
-      res.status(204).send(); // Successfully deleted, no content to return
+      res.status(204).send();
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error deleting location' });
