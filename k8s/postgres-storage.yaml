@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data/locationservice-db" # Caminho local no nó onde os dados serão armazenados
+    path: "/mnt/data/locationservice-db" 
 
 ---
 # PersistentVolumeClaim para utilizar o PV acima

@@ -25,12 +25,12 @@ spec:
             - name: POSTGRES_PASSWORD
               value: "locationservice_pass"      
             - name: POSTGRES_DB
-              value: "locationservice_db"    # Nome DB
+              value: "locationservice_db" 
           ports:
-            - containerPort: 5432     # Porta padrão do PostgreSQL
+            - containerPort: 5432    
           volumeMounts:
             - name: locationservice-db-data
-              mountPath: /var/lib/postgresql/data # Diretório de dados
+              mountPath: /var/lib/postgresql/data 
   volumeClaimTemplates:
     - metadata:
         name: locationservice-db-data
@@ -52,7 +52,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 5436           # Porta do serviço
-      targetPort: 5432     # Porta no container
+    - port: 5436          
+      targetPort: 5432     
   selector:
-    app: locationservice-db        # Seleciona o StatefulSet pelo label
+    app: locationservice-db      
