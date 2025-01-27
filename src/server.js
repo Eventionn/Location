@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import routes from './routes/routes.js';
 import swaggerUi from 'swagger-ui-express';
+import https from 'https';
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,15 @@ app.get('/', (req, res) => {
   res.json('hello there');
 });
 
-app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+//app.listen(PORT, () => {
+//  console.log(`listening on port ${PORT}`);
+//});
+
+// Criar servidor HTTPS
+https.createServer({ 
+  key, 
+  cert, 
+  passphrase: 'benfica' // passphrase
+}, app).listen(PORT, () => {
+  console.log(`HTTPS server listening on port ${PORT}`);
 });
