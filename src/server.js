@@ -10,6 +10,10 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
+// Ler certificados SSL/TLS
+const key = fs.readFileSync(path.resolve('/usr/src/app/key.pem'));
+const cert = fs.readFileSync(path.resolve('/usr/src/app/cert.pem'));
+
 app.use(express.json());
 app.use('/api', routes);
 
