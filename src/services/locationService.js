@@ -55,7 +55,19 @@ const locationService = {
     await prisma.location.delete({
       where: { locationId: locationId },
     });
+  },
+
+  /**
+   * Get a specific location by localtown
+   * @param {string} localtown - The name of the localtown to fetch
+   * @returns {Promise<Object|null>} The location object or null if not found
+   */
+  async getLocationByLocaltown(localtown) {
+    return prisma.location.findFirst({
+      where: { localtown: localtown },
+    });
   }
+
 };
 
 export default locationService;

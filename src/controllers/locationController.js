@@ -111,7 +111,32 @@ const locationController = {
       console.error(error);
       res.status(500).json({ message: 'Error deleting location' });
     }
+  },
+
+  /**
+   * Get a specific location by localtown
+   * @route {GET} /location/localtown/:localtown
+   * @param {string} localtown - The name of the localtown
+   * @returns {Object} The location object
+   */
+  async getLocationByLocaltown(req, res) {
+    try {
+      const localtown = req.params.localtown;
+      const location = await locationService.getLocationByLocaltown(localtown);
+
+      if (!location) {
+        return res.status(404).json({ message: 'Location not found' });
+      }
+
+      res.status(200).json(location);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching location' });
+    }
   }
+
 };
+
+
 
 export default locationController;
