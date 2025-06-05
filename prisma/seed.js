@@ -1,16 +1,24 @@
 import { prisma } from '../src/prismaClient.js';
 import fs from 'fs';
-import { v4 as uuidv4 } from 'uuid';  
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { v4 as uuidv4 } from 'uuid';
+
+// Suporte a __dirname em ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const loadLocationsFromFile = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile('./freguesias-metadata.json', 'utf8', (err, data) => {
+    const filePath = path.join(__dirname, 'freguesias-metadata.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         return reject(err);
       }
       try {
         const parsedData = JSON.parse(data);
-        resolve(parsedData.d); 
+        resolve(parsedData.d);
       } catch (parseError) {
         reject(parseError);
       }
@@ -25,13 +33,13 @@ const seedDatabase = async () => {
     const locationsData = await loadLocationsFromFile();
 
     const formattedLocations = locationsData.map(location => ({
-      locationId: uuidv4(), 
-      localtown: location.concelho, 
+      locationId: uuidv4(),
+      localtown: location.concelho,
       city: location.freguesia,
     }));
 
     for (const location of formattedLocations) {
-      const createdLocation = await prisma.location.create({
+      await prisma.location.create({
         data: location,
       });
     }
