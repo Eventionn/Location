@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "/location/api",
+      "url": "/location",
       "description": "Local server"
     }
   ],
