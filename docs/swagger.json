@@ -12,7 +12,7 @@
     }
   ],
   "paths": {
-    "/api/location": {
+    "/location": {
       "get": {
         "summary": "Get all locations",
         "operationId": "getAllLocations",
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/api/location/{id}": {
+    "/location/{id}": {
       "get": {
         "summary": "Get a specific location by ID",
         "operationId": "getLocationById",
